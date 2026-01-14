@@ -22,6 +22,8 @@ Users can enter any text or URL, generate a QR code instantly, and download it a
 3. The QR code appears instantly
 4. Click **Download QR** to save the image
 
+## Live Link
+https://shehjadnoor.github.io/qr-code-generator/
 
 ## Author
 Crafted by **Shehjad**
