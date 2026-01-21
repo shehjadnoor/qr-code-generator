@@ -14,30 +14,30 @@ function generateQR() {
     qr = new QRCode(qrContainer, {
         text: text,
         width: 200,
-        height: 200,
+        height: 200
     });
 }
+
 function downloadQR() {
     const qrContainer = document.getElementById("qrcode");
+    const canvas = qrContainer.querySelector("canvas");
 
-    if (qrContainer.innerHTML === "") {
+    if (!canvas) {
         alert("Generate a QR code first!");
         return;
     }
 
-    const img = qrContainer.querySelector("img");
-    const canvas = qrContainer.querySelector("canvas");
+    canvas.toBlob(function (blob) {
+        const url = URL.createObjectURL(blob);
 
-    let qrImage;
+        const link = document.createElement("a");
+        link.href = url;
+        link.download = "qr-code.png";
 
-    if (img) {
-        qrImage = img.src;
-    } else if (canvas) {
-        qrImage = canvas.toDataURL("image/png");
-    }
+        document.body.appendChild(link);
+        link.click();
 
-    const link = document.createElement("a");
-    link.href = qrImage;
-    link.download = "qr-code.png";
-    link.click();
+        document.body.removeChild(link);
+        URL.revokeObjectURL(url);
+    }, "image/png");
 }
